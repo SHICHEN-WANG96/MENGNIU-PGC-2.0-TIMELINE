@@ -874,29 +874,36 @@ async function loadData() {
   const btn = document.getElementById('refreshBtn');
   btn.classList.add('spin');
   try {
-    // 优先尝试从同目录的静态 data.json 加载（适合 GitHub Pages 等静态托管）
-    let r = await fetch('./data.json');
+    // 优先尝试连接本地服务（获取最新 Excel 数据）
+    let r = await fetch('http://localhost:8765/api/data');
     if (r.ok) {
-      allData = await r.json();
-      renderAll();
-    } else {
-      // 回退到本地 API（如果用户在本机运行后端）
-      r = await fetch('http://localhost:8765/api/data');
-      if (!r.ok) throw new Error('HTTP ' + r.status);
       allData = await r.json();
       if (allData.error) throw new Error(allData.error);
       renderAll();
+    } else {
+      throw new Error('HTTP ' + r.status);
     }
   } catch(e) {
-    document.getElementById('mainContent').innerHTML = `
-      <div class="error-box">
-        <div class="error-title">⚠ 无法获取数据</div>
-        <div class="error-body">
-          已尝试加载同目录的 <code>data.json</code>，但失败。若要静态发布，请把有效的 <code>data.json</code> 放到与页面同一目录。<br>
-          或在本机启动后端：<code>python server.py</code><br><br>
-          错误：${esc(e.message)}
-        </div>
-      </div>`;
+    // 本地服务未启动，回退到静态 data.json（适合 GitHub Pages）
+    try {
+      let r = await fetch('./data.json');
+      if (r.ok) {
+        allData = await r.json();
+        renderAll();
+      } else {
+        throw new Error('HTTP ' + r.status);
+      }
+    } catch(e2) {
+      document.getElementById('mainContent').innerHTML = `
+        <div class="error-box">
+          <div class="error-title">⚠ 无法获取数据</div>
+          <div class="error-body">
+            本地服务未启动，且未找到 <code>data.json</code>。<br>
+            请在本机启动后端：<code>python server.py</code><br><br>
+            错误：${esc(e.message)}
+          </div>
+        </div>`;
+    }
   } finally {
     setTimeout(() => btn.classList.remove('spin'), 600);
   }

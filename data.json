@@ -1,72 +1,1136 @@
 {
-  "updated_at": "2026-03-24T10:00:00",
-  "summary": { "total": 3, "done": 1, "in_progress": 1, "pending": 1 },
-  "categories": [
-    { "name": "BI仪表盘", "total": 2, "done": 1 },
-    { "name": "基础数据", "total": 1, "done": 0 }
-  ],
+  "project_name": "蒙牛PGC 2.0 - 经营一张表",
   "items": [
     {
-      "name": "进度看板",
-      "category": "BI仪表盘",
+      "name": "1.1 经营结果复盘-关键指标",
+      "category": "1.经营结果复盘",
       "stages": [
-        { "name": "原型成稿", "status": "done" },
-        { "name": "提交评审", "status": "done" },
-        { "name": "原型评审", "status": "done" },
-        { "name": "ADS结构", "status": "done" },
-        { "name": "ADS数据", "status": "in_progress" },
-        { "name": "BI开发", "status": "in_progress" },
-        { "name": "BI测试", "status": "pending" }
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
       ],
-      "progress": 60,
+      "progress": 20,
       "status": "in_progress",
       "dates": {
-        "原型开始": "2026-02-01",
-        "原型截止": "2026-02-05",
-        "提交评审": "2026-02-06",
-        "评审开始": "2026-02-07",
-        "原型定稿": "2026-02-09",
-        "ADS结构": "2026-02-10",
-        "ADS数据": "2026-03-01",
-        "BI开始": "2026-03-05",
-        "BI截止": "2026-03-20",
-        "测试开始": "2026-03-21",
-        "测试结束": "2026-03-25"
+        "原型开始": "2026-03-13",
+        "原型截止": "2026-03-16",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": null,
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
       }
     },
     {
-      "name": "数据建模",
-      "category": "BI仪表盘",
+      "name": "1.2 经营结果复盘-经营指标",
+      "category": "1.经营结果复盘",
       "stages": [
-        { "name": "原型成稿", "status": "done" },
-        { "name": "提交评审", "status": "done" },
-        { "name": "原型评审", "status": "done" },
-        { "name": "ADS结构", "status": "done" },
-        { "name": "ADS数据", "status": "done" },
-        { "name": "BI开发", "status": "done" },
-        { "name": "BI测试", "status": "done" }
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
       ],
-      "progress": 100,
-      "status": "done",
+      "progress": 20,
+      "status": "in_progress",
       "dates": {
-        "原型开始": "2025-12-01",
-        "原型截止": "2025-12-03",
-        "ADS结构": "2025-12-05",
-        "ADS数据": "2025-12-10",
-        "BI开始": "2025-12-11",
-        "BI截止": "2025-12-20"
+        "原型开始": "2026-03-13",
+        "原型截止": "2026-03-16",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": null,
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
       }
     },
     {
-      "name": "基础字典维护",
-      "category": "基础数据",
+      "name": "1.3 经营结果复盘-利润变动",
+      "category": "1.经营结果复盘",
       "stages": [
-        { "name": "原型成稿", "status": "pending" },
-        { "name": "提交评审", "status": "pending" }
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
       ],
-      "progress": 0,
-      "status": "pending",
-      "dates": {}
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-13",
+        "原型截止": "2026-03-16",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": null,
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.1收入达成销售节奏",
+      "category": "2.1收入达成",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-21",
+        "原型截止": "2026-03-21",
+        "提交评审": "2026-03-21",
+        "评审开始": "2026-03-24",
+        "原型定稿": "2026-03-24",
+        "ADS结构": "2026-03-24",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.1收入达成品类达成",
+      "category": "2.1收入达成",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-21",
+        "原型截止": "2026-03-21",
+        "提交评审": "2026-03-21",
+        "评审开始": "2026-03-23",
+        "原型定稿": null,
+        "ADS结构": "2026-03-21",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.1收入达成区域达成",
+      "category": "2.1收入达成",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-21",
+        "原型截止": "2026-03-21",
+        "提交评审": "2026-03-21",
+        "评审开始": "2026-03-23",
+        "原型定稿": null,
+        "ADS结构": "2026-03-21",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.1收入达成新品达成",
+      "category": "2.1收入达成",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-21",
+        "原型截止": "2026-03-21",
+        "提交评审": "2026-03-21",
+        "评审开始": "2026-03-23",
+        "原型定稿": null,
+        "ADS结构": "2026-03-21",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.2费用投入营销费用",
+      "category": "2.2费用投入",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-19",
+        "原型截止": "2026-03-19",
+        "提交评审": "2026-03-19",
+        "评审开始": "2026-03-19",
+        "原型定稿": null,
+        "ADS结构": "2026-03-19",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.2费用投入行销费用",
+      "category": "2.2费用投入",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-19",
+        "原型截止": "2026-03-19",
+        "提交评审": "2026-03-19",
+        "评审开始": "2026-03-19",
+        "原型定稿": null,
+        "ADS结构": "2026-03-19",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.2费用投入市场费用",
+      "category": "2.2费用投入",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-19",
+        "原型截止": "2026-03-19",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": null,
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.3生产成本-生产成本",
+      "category": "2.3生产成本",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-20",
+        "原型截止": "2026-03-20",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": null,
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.3生产成本-需供匹配",
+      "category": "2.3生产成本",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-20",
+        "原型截止": "2026-03-20",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": null,
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.3生产成本-牛奶损益",
+      "category": "2.3生产成本",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-20",
+        "原型截止": "2026-03-20",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": null,
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.3生产成本-奶价分析",
+      "category": "2.3生产成本",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-20",
+        "原型截止": "2026-03-20",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": null,
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.4物流费用整体指标",
+      "category": "2.4物流费用",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-06",
+        "原型截止": "2026-03-19",
+        "提交评审": "2026-03-19",
+        "评审开始": "2026-03-24",
+        "原型定稿": null,
+        "ADS结构": "2026-03-23",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.4物流费用分单元物流",
+      "category": "2.4物流费用",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-10",
+        "原型截止": "2026-03-19",
+        "提交评审": "2026-03-19",
+        "评审开始": "2026-03-24",
+        "原型定稿": "2026-03-24",
+        "ADS结构": "2026-03-24",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.4物流费用干支线物流",
+      "category": "2.4物流费用",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-10",
+        "原型截止": "2026-03-19",
+        "提交评审": "2026-03-19",
+        "评审开始": "2026-03-24",
+        "原型定稿": "2026-03-24",
+        "ADS结构": "2026-03-24",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.5运营效率整体库存",
+      "category": "2.5运营效率",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-10",
+        "原型截止": "2026-03-22",
+        "提交评审": "2026-03-22",
+        "评审开始": "2026-03-24",
+        "原型定稿": "2026-03-24",
+        "ADS结构": "2026-03-24",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.5运营效率周转分析",
+      "category": "2.5运营效率",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-21",
+        "原型截止": "2026-03-22",
+        "提交评审": "2026-03-22",
+        "评审开始": "2026-03-24",
+        "原型定稿": "2026-03-24",
+        "ADS结构": "2026-03-24",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.5运营效率日期分析",
+      "category": "2.5运营效率",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-21",
+        "原型截止": "2026-03-22",
+        "提交评审": "2026-03-22",
+        "评审开始": "2026-03-24",
+        "原型定稿": "2026-03-24",
+        "ADS结构": "2026-03-24",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.5运营效率应收账款",
+      "category": "2.5运营效率",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "in_progress"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 20,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-04",
+        "原型截止": "2026-03-06",
+        "提交评审": "2026-03-09",
+        "评审开始": "2026-03-25",
+        "原型定稿": null,
+        "ADS结构": "2026-03-19",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.6产线效率-产能分析",
+      "category": "2.6产线效率",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-19",
+        "原型截止": "2026-03-20",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": "2026-03-21",
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.6产线效率-闲置资产",
+      "category": "2.6产线效率",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-19",
+        "原型截止": "2026-03-20",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": "2026-03-20",
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.6产线效率-投资支出",
+      "category": "2.6产线效率",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-19",
+        "原型截止": "2026-03-20",
+        "提交评审": "2026-03-20",
+        "评审开始": "2026-03-20",
+        "原型定稿": "2026-03-20",
+        "ADS结构": "2026-03-20",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.7管理成本人力成本",
+      "category": "2.7管理成本",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-05",
+        "原型截止": "2026-03-06",
+        "提交评审": "2026-03-09",
+        "评审开始": "2026-03-18",
+        "原型定稿": "2026-03-18",
+        "ADS结构": "2026-03-18",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
+    },
+    {
+      "name": "2.7管理成本行政费用",
+      "category": "2.7管理成本",
+      "stages": [
+        {
+          "name": "原型成稿",
+          "status": "done"
+        },
+        {
+          "name": "ADS表结构",
+          "status": "done"
+        },
+        {
+          "name": "ADS数据",
+          "status": "pending"
+        },
+        {
+          "name": "BI开发",
+          "status": "pending"
+        },
+        {
+          "name": "BI测试",
+          "status": "pending"
+        }
+      ],
+      "progress": 40,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-03-05",
+        "原型截止": "2026-03-06",
+        "提交评审": "2026-03-09",
+        "评审开始": "2026-03-18",
+        "原型定稿": "2026-03-18",
+        "ADS结构": "2026-03-18",
+        "ADS数据": null,
+        "BI开始": null,
+        "BI截止": null,
+        "测试开始": null,
+        "测试结束": null
+      }
     }
-  ]
+  ],
+  "summary": {
+    "total": 26,
+    "done": 0,
+    "in_progress": 26,
+    "pending": 0
+  },
+  "categories": [
+    {
+      "name": "1.经营结果复盘",
+      "total": 3,
+      "done": 0,
+      "in_progress": 3,
+      "pending": 0
+    },
+    {
+      "name": "2.1收入达成",
+      "total": 4,
+      "done": 0,
+      "in_progress": 4,
+      "pending": 0
+    },
+    {
+      "name": "2.2费用投入",
+      "total": 3,
+      "done": 0,
+      "in_progress": 3,
+      "pending": 0
+    },
+    {
+      "name": "2.3生产成本",
+      "total": 4,
+      "done": 0,
+      "in_progress": 4,
+      "pending": 0
+    },
+    {
+      "name": "2.4物流费用",
+      "total": 3,
+      "done": 0,
+      "in_progress": 3,
+      "pending": 0
+    },
+    {
+      "name": "2.5运营效率",
+      "total": 4,
+      "done": 0,
+      "in_progress": 4,
+      "pending": 0
+    },
+    {
+      "name": "2.6产线效率",
+      "total": 3,
+      "done": 0,
+      "in_progress": 3,
+      "pending": 0
+    },
+    {
+      "name": "2.7管理成本",
+      "total": 2,
+      "done": 0,
+      "in_progress": 2,
+      "pending": 0
+    }
+  ],
+  "updated_at": "2026-03-24 21:06:50"
 }
