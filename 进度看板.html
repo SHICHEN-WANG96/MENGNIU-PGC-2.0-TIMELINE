@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PGC 2.0 · BI开发进度看板</title>
+<style>
+/* 系统字体栈，无需网络，即时加载 */
+</style>
+<style>
+/* ─── 主题变量 ─── */
+:root { --ease: cubic-bezier(.4,0,.2,1); --speed: .22s; }
+
+[data-theme="light"] {
+  --bg:          #F0F4F8;
+  --surface:     #FFFFFF;
+  --surface2:    #F8FAFC;
+  --surface3:    #EEF2F7;
+  --border:      #E2E8F0;
+  --border-s:    #CBD5E1;
+  --txt1:        #0F172A;
+  --txt2:        #475569;
+  --txt3:        #94A3B8;
+  --accent:      #2563EB;
+  --accent2:     #3B82F6;
+  --accent-soft: rgba(37,99,235,.08);
+  --green:       #059669;
+  --green-soft:  rgba(5,150,105,.09);
+  --amber:       #D97706;
+  --amber-soft:  rgba(217,119,6,.09);
+  --slate:       #64748B;
+  --slate-soft:  rgba(100,116,139,.09);
+  --red:         #DC2626;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.07), 0 2px 6px rgba(0,0,0,.04);
+  --shadow-lg:   0 10px 40px rgba(0,0,0,.09);
+}
+
+[data-theme="dark"] {
+  --bg:          #080D17;
+  --surface:     #0E1525;
+  --surface2:    #131D30;
+  --surface3:    #182236;
+  --border:      rgba(255,255,255,.07);
+  --border-s:    rgba(255,255,255,.12);
+  --txt1:        #F1F5F9;
+  --txt2:        #7C8CA3;
+  --txt3:        #3D4E63;
+  --accent:      #3B82F6;
+  --accent2:     #60A5FA;
+  --accent-soft: rgba(59,130,246,.12);
+  --green:       #10B981;
+  --green-soft:  rgba(16,185,129,.12);
+  --amber:       #F59E0B;
+  --amber-soft:  rgba(245,158,11,.12);
+  --slate:       #64748B;
+  --slate-soft:  rgba(100,116,139,.12);
+  --red:         #F87171;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,.3);
+  --shadow-md:   0 4px 20px rgba(0,0,0,.35);
+  --shadow-lg:   0 12px 48px rgba(0,0,0,.5);
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Microsoft YaHei', 'PingFang SC', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--txt1);
+  min-height: 100vh;
+  transition: background var(--speed) var(--ease), color var(--speed) var(--ease);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-s); border-radius: 99px; }
+
+/* ═══════════════════════════════
+   HEADER
+═══════════════════════════════ */
+.header {
+  position: sticky; top: 0; z-index: 200;
+  height: 58px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 32px;
+  gap: 20px;
+  transition: background var(--speed) var(--ease), border-color var(--speed) var(--ease);
+  box-shadow: var(--shadow-sm);
+}
+
+.header-brand {
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0;
+}
+.brand-pill {
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Microsoft YaHei', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.brand-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--txt1);
+  letter-spacing: -.01em;
+}
+.brand-divider {
+  width: 1px; height: 18px;
+  background: var(--border);
+  margin: 0 4px;
+}
+.brand-sub {
+  font-size: 12px;
+  color: var(--txt3);
+  font-weight: 400;
+}
+
+.header-spacer { flex: 1; }
+
+.header-meta {
+  font-size: 11px;
+  color: var(--txt3);
+  display: flex; align-items: center; gap: 6px;
+}
+.meta-dot {
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--green-soft);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 2px var(--green-soft); }
+  50%      { box-shadow: 0 0 0 5px transparent; }
+}
+
+/* 主题切换 */
+.theme-switch {
+  display: flex;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+.ts-btn {
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--txt3);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+  transition: all var(--speed) var(--ease);
+  font-family: inherit;
+}
+.ts-btn.on {
+  background: var(--surface);
+  color: var(--txt1);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 刷新 */
+.refresh-btn {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--txt2);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  transition: all var(--speed) var(--ease);
+}
+.refresh-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.refresh-btn.spin { animation: spin .7s linear; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ═══════════════════════════════
+   LAYOUT
+═══════════════════════════════ */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: calc(100vh - 58px);
+}
+
+/* ─── Sidebar ─── */
+.sidebar {
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  padding: 24px 0;
+  position: sticky;
+  top: 58px;
+  height: calc(100vh - 58px);
+  overflow-y: auto;
+  transition: background var(--speed) var(--ease), border-color var(--speed) var(--ease);
+}
+
+.sidebar-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  padding: 0 20px 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: all var(--speed) var(--ease);
+  position: relative;
+}
+.nav-item:hover { background: var(--surface2); color: var(--txt1); }
+.nav-item.active {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+.nav-item-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: inherit;
+  flex: 1;
+  line-height: 1.4;
+}
+.nav-item:not(.active) .nav-item-name { color: var(--txt2); }
+.nav-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 99px;
+  background: var(--surface3);
+  color: var(--txt3);
+}
+.nav-item.active .nav-badge {
+  background: var(--accent);
+  color: #fff;
+}
+
+.nav-mini-bar {
+  width: 28px; height: 3px;
+  border-radius: 99px;
+  background: var(--surface3);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.nav-mini-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--green);
+  transition: width .6s var(--ease);
+}
+
+.sidebar-divider { height: 1px; background: var(--border); margin: 12px 20px; }
+
+/* ─── Main ─── */
+.main { padding: 28px 32px 60px; min-width: 0; }
+
+/* ═══════════════════════════════
+   KPI STRIP
+═══════════════════════════════ */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--speed) var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.kpi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+
+.kpi-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.kpi-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--txt3);
+}
+.kpi-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+}
+.kpi-icon.blue  { background: var(--accent-soft);  color: var(--accent); }
+.kpi-icon.green { background: var(--green-soft);   color: var(--green); }
+.kpi-icon.amber { background: var(--amber-soft);   color: var(--amber); }
+.kpi-icon.slate { background: var(--slate-soft);   color: var(--slate); }
+
+.kpi-value {
+  font-family: 'Microsoft YaHei', system-ui, sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.kpi-card.c-blue  .kpi-value { color: var(--accent); }
+.kpi-card.c-green .kpi-value { color: var(--green); }
+.kpi-card.c-amber .kpi-value { color: var(--amber); }
+.kpi-card.c-slate .kpi-value { color: var(--slate); }
+
+.kpi-foot {
+  font-size: 11px;
+  color: var(--txt3);
+  display: flex; align-items: center; gap: 5px;
+}
+.kpi-rate {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 99px;
+}
+.kpi-rate.green { background: var(--green-soft); color: var(--green); }
+.kpi-rate.amber { background: var(--amber-soft); color: var(--amber); }
+.kpi-rate.slate { background: var(--slate-soft); color: var(--slate); }
+
+/* ═══════════════════════════════
+   PROGRESS BANNER
+═══════════════════════════════ */
+.progress-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.pb-label { font-size: 12px; font-weight: 600; color: var(--txt2); white-space: nowrap; }
+.pb-bar-wrap { flex: 1; }
+.pb-bar-bg {
+  height: 8px;
+  background: var(--surface3);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+.pb-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent) 0%, #8B5CF6 100%);
+  transition: width 1.1s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.pb-bar-fill::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 20%, rgba(255,255,255,.25) 50%, transparent 80%);
+  animation: sheen 2.5s linear infinite;
+}
+@keyframes sheen { from { transform: translateX(-100%); } to { transform: translateX(200%); } }
+.pb-stages {
+  display: flex; gap: 8px; flex-shrink: 0;
+}
+.pb-stage-chip {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: var(--txt3);
+}
+.pb-stage-dot { width: 8px; height: 8px; border-radius: 2px; }
+.pb-pct {
+  font-family: 'Microsoft YaHei', system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  letter-spacing: -.02em;
+}
+
+/* ═══════════════════════════════
+   FILTER BAR
+═══════════════════════════════ */
+.filter-bar {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex: 1; min-width: 180px;
+}
+.search-icon-el {
+  position: absolute; left: 11px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--txt3);
+  font-size: 13px;
+  pointer-events: none;
+}
+.search-input {
+  width: 100%; height: 36px;
+  padding: 0 12px 0 34px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--txt1);
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  transition: all var(--speed) var(--ease);
+}
+.search-input::placeholder { color: var(--txt3); }
+.search-input:focus { border-color: var(--accent2); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+.seg-group {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.seg-btn {
+  height: 36px;
+  padding: 0 14px;
+  border: none;
+  background: transparent;
+  color: var(--txt2);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+  transition: all var(--speed) var(--ease);
+  font-family: inherit;
+  border-right: 1px solid var(--border);
+  white-space: nowrap;
+}
+.seg-btn:last-child { border-right: none; }
+.seg-btn:hover { background: var(--surface2); color: var(--txt1); }
+.seg-btn.on { background: var(--accent); color: #fff; }
+.seg-btn.on.green { background: var(--green); }
+.seg-btn.on.amber { background: var(--amber); }
+.seg-btn.on.slate { background: var(--slate); }
+
+.count-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.2);
+}
+.seg-btn:not(.on) .count-badge { background: var(--surface3); color: var(--txt3); }
+
+/* ═══════════════════════════════
+   TABLE
+═══════════════════════════════ */
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.table-head {
+  display: grid;
+  grid-template-columns: 1fr 260px 120px 100px;
+  padding: 10px 20px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+}
+.th {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--txt3);
+}
+
+.t-row {
+  display: grid;
+  grid-template-columns: 1fr 260px 120px 100px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background var(--speed) var(--ease);
+}
+.t-row:last-child { border-bottom: none; }
+.t-row:hover { background: var(--surface2); }
+
+.t-cell {
+  padding: 14px 0;
+  display: flex;
+  align-items: center;
+}
+
+.row-name { font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--txt1); }
+.row-cat  { font-size: 11px; color: var(--txt3); margin-top: 2px; }
+
+/* 阶段气泡 */
+.pipeline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.pipe-item {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  flex: 1;
+}
+.pipe-connector {
+  flex: 0 0 12px;
+  height: 1px;
+  background: var(--border);
+}
+.pipe-dot {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  transition: all var(--speed) var(--ease);
+  position: relative;
+}
+.pipe-dot.done {
+  background: var(--green-soft);
+  color: var(--green);
+  border: 1.5px solid var(--green);
+}
+.pipe-dot.in_progress {
+  background: var(--amber-soft);
+  color: var(--amber);
+  border: 1.5px solid var(--amber);
+  animation: ring .9s ease-in-out infinite alternate;
+}
+@keyframes ring {
+  from { box-shadow: 0 0 0 0 var(--amber-soft); }
+  to   { box-shadow: 0 0 0 4px transparent; }
+}
+.pipe-dot.pending {
+  background: var(--surface3);
+  color: var(--txt3);
+  border: 1.5px dashed var(--border-s);
+}
+.pipe-lbl {
+  font-size: 9px;
+  color: var(--txt3);
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* 进度列 */
+.prog-col { flex-direction: column; align-items: flex-start; gap: 5px; }
+.prog-track {
+  width: 100%;
+  height: 5px;
+  background: var(--surface3);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width .8s var(--ease);
+}
+.prog-fill.g { background: var(--green); }
+.prog-fill.a { background: var(--amber); }
+.prog-fill.s { background: var(--slate); }
+.prog-num { font-size: 11px; font-weight: 600; color: var(--txt2); }
+
+/* 状态 badge */
+.status-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.status-pill.done     { background: var(--green-soft); color: var(--green); }
+.status-pill.in_progress { background: var(--amber-soft); color: var(--amber); }
+.status-pill.pending  { background: var(--slate-soft);  color: var(--slate); }
+.pill-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+/* ─── 展开行（甘特图） ─── */
+.detail-row {
+  display: none;
+  padding: 16px 20px 20px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+}
+.detail-row.open { display: block; }
+.detail-head { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--txt3); margin-bottom: 14px; }
+
+/* 甘特图容器 */
+.gantt-wrap { overflow-x: auto; }
+.gantt {
+  min-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* 时间刻度头 */
+.gantt-header {
+  display: flex;
+  margin-left: 90px;
+  margin-bottom: 6px;
+}
+.gantt-tick {
+  flex: 1;
+  font-size: 10px;
+  color: var(--txt3);
+  text-align: center;
+  white-space: nowrap;
+  border-left: 1px dashed var(--border);
+  padding-left: 3px;
+  line-height: 1.2;
+}
+
+/* 每行 */
+.gantt-row {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  position: relative;
+}
+.gantt-row:hover { background: var(--surface3); border-radius: 6px; }
+
+.gantt-label {
+  width: 90px;
+  flex-shrink: 0;
+  font-size: 10px;
+  color: var(--txt2);
+  font-weight: 500;
+  padding-right: 10px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.gantt-track {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* 垂直参考线 */
+.gantt-track::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--border) 0px,
+    var(--border) 1px,
+    transparent 1px,
+    transparent calc(100% / var(--gantt-cols, 7))
+  );
+  pointer-events: none;
+  opacity: .5;
+}
+
+/* 甘特条 */
+.gantt-bar {
+  position: absolute;
+  height: 14px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all var(--speed) var(--ease);
+  cursor: default;
+  min-width: 4px;
+}
+.gantt-bar:hover { height: 18px; z-index: 10; }
+
+/* 里程碑点（开始/结束单点） */
+.gantt-milestone {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  border: 2px solid var(--surface2);
+  transition: all var(--speed) var(--ease);
+}
+
+/* 今日线 */
+.gantt-today-line {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 1.5px;
+  background: var(--red);
+  opacity: .7;
+  z-index: 5;
+}
+.gantt-today-label {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--red);
+  white-space: nowrap;
+}
+
+/* tooltip */
+.gantt-bar[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--txt1);
+  color: var(--surface);
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: var(--shadow-md);
+}
+
+/* ═══════════════════════════════
+   LOADING / ERROR / EMPTY
+═══════════════════════════════ */
+.state-wrap {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 100px 20px; gap: 16px;
+}
+.spinner-ring {
+  width: 36px; height: 36px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+.state-text { font-size: 13px; color: var(--txt2); }
+
+.error-box {
+  background: rgba(220,38,38,.07);
+  border: 1px solid rgba(220,38,38,.2);
+  border-radius: 12px;
+  padding: 28px 32px;
+  text-align: center;
+}
+.error-title { font-size: 14px; font-weight: 600; color: var(--red); margin-bottom: 8px; }
+.error-body { font-size: 12px; color: var(--txt2); line-height: 1.7; }
+.error-body code { background: var(--surface3); padding: 2px 7px; border-radius: 4px; font-size: 12px; }
+
+/* ─── 空 ─── */
+.empty-msg { padding: 60px 20px; text-align: center; color: var(--txt3); font-size: 13px; }
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+}
+@media (max-width: 860px) {
+  .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+  .table-head, .t-row { grid-template-columns: 1fr 80px 90px; }
+  .th:nth-child(2), .t-cell:nth-child(2) { display: none; }
+  .main { padding: 20px 16px 40px; }
+  .progress-banner { flex-wrap: wrap; }
+}
+@media (max-width: 540px) {
+  .header { padding: 0 16px; }
+  .brand-divider, .brand-sub { display: none; }
+  .kpi-strip { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="header-brand">
+    <span class="brand-pill">PGC 2.0</span>
+    <span class="brand-name">BI开发进度</span>
+    <span class="brand-divider"></span>
+    <span class="brand-sub">经营一张表</span>
+  </div>
+
+  <div class="header-spacer"></div>
+
+  <div class="header-meta">
+    <div class="meta-dot"></div>
+    <span id="lastUpdate">实时数据</span>
+  </div>
+
+  <div class="theme-switch">
+    <button class="ts-btn on" id="btnDark" onclick="setTheme('dark')">🌙 深色</button>
+    <button class="ts-btn"    id="btnLight" onclick="setTheme('light')">☀️ 浅色</button>
+  </div>
+
+  <button class="refresh-btn" id="refreshBtn" onclick="loadData()" title="刷新数据">↻</button>
+  <button class="refresh-btn" onclick="openConfig()" title="项目配置" style="font-size:15px">⚙</button>
+</header>
+
+<!-- ═══ LAYOUT ═══ -->
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section-label">模块视图</div>
+    <div id="navItems"></div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div id="mainContent">
+      <div class="state-wrap">
+        <div class="spinner-ring"></div>
+        <div class="state-text">正在连接数据服务...</div>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script>
+/* ═══ 主题 ═══ */
+function setTheme(t) {
+  document.body.dataset.theme = t;
+  document.getElementById('btnDark').classList.toggle('on', t === 'dark');
+  document.getElementById('btnLight').classList.toggle('on', t === 'light');
+  localStorage.setItem('pgc_theme', t);
+}
+setTheme(localStorage.getItem('pgc_theme') || 'dark');
+
+/* ═══ 状态 ═══ */
+let allData = null;
+let activeFilter = 'all';
+let activeCategory = null;
+let searchText = '';
+
+const STAGE_ICON  = { done: '✓', in_progress: '●', pending: '○' };
+const STATUS_LBL  = { done: '已完成', in_progress: '进行中', pending: '待开始' };
+const PROG_CLASS  = { done: 'g', in_progress: 'a', pending: 's' };
+
+/* ═══ 数据 ═══ */
+async function loadData() {
+  const btn = document.getElementById('refreshBtn');
+  btn.classList.add('spin');
+  try {
+    // 优先尝试从同目录的静态 data.json 加载（适合 GitHub Pages 等静态托管）
+    let r = await fetch('./data.json');
+    if (r.ok) {
+      allData = await r.json();
+      renderAll();
+    } else {
+      // 回退到本地 API（如果用户在本机运行后端）
+      r = await fetch('http://localhost:8765/api/data');
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      allData = await r.json();
+      if (allData.error) throw new Error(allData.error);
+      renderAll();
+    }
+  } catch(e) {
+    document.getElementById('mainContent').innerHTML = `
+      <div class="error-box">
+        <div class="error-title">⚠ 无法获取数据</div>
+        <div class="error-body">
+          已尝试加载同目录的 <code>data.json</code>，但失败。若要静态发布，请把有效的 <code>data.json</code> 放到与页面同一目录。<br>
+          或在本机启动后端：<code>python server.py</code><br><br>
+          错误：${esc(e.message)}
+        </div>
+      </div>`;
+  } finally {
+    setTimeout(() => btn.classList.remove('spin'), 600);
+  }
+}
+
+/* ═══ 渲染 ═══ */
+function renderAll() {
+  if (!allData) return;
+  const s = allData.summary;
+  const rate = s.total ? Math.round(s.done / s.total * 100) : 0;
+
+  document.getElementById('lastUpdate').textContent = allData.updated_at.slice(0,16) + ' 更新';
+
+  /* — Sidebar 导航 — */
+  const nav = document.getElementById('navItems');
+  nav.innerHTML = `
+    <div class="nav-item${!activeCategory ? ' active' : ''}" onclick="setCategory(null)">
+      <span class="nav-item-name">全部模块</span>
+      <span class="nav-badge">${s.total}</span>
+    </div>
+    <div class="sidebar-divider"></div>
+    ${allData.categories.map(c => {
+      const r2 = c.total ? Math.round(c.done / c.total * 100) : 0;
+      return `<div class="nav-item${activeCategory === c.name ? ' active' : ''}" onclick="setCategory('${esc(c.name)}')">
+        <div class="nav-mini-bar"><div class="nav-mini-fill" style="width:${r2}%"></div></div>
+        <span class="nav-item-name">${esc(c.name)}</span>
+        <span class="nav-badge">${c.total}</span>
+      </div>`;
+    }).join('')}`;
+
+  /* — 过滤 — */
+  let items = allData.items;
+  if (activeCategory) items = items.filter(i => i.category === activeCategory);
+  if (activeFilter !== 'all') items = items.filter(i => i.status === activeFilter);
+  if (searchText) {
+    const q = searchText.toLowerCase();
+    items = items.filter(i => i.name.toLowerCase().includes(q) || i.category.toLowerCase().includes(q));
+  }
+
+  /* — KPI — */
+  const kpiHtml = `<div class="kpi-strip">
+    <div class="kpi-card c-blue">
+      <div class="kpi-top">
+        <span class="kpi-label">总任务</span>
+        <span class="kpi-icon blue">📋</span>
+      </div>
+      <div class="kpi-value">${s.total}</div>
+      <div class="kpi-foot">${allData.categories.length} 个模块</div>
+    </div>
+    <div class="kpi-card c-green">
+      <div class="kpi-top">
+        <span class="kpi-label">已完成</span>
+        <span class="kpi-icon green">✓</span>
+      </div>
+      <div class="kpi-value">${s.done}</div>
+      <div class="kpi-foot"><span class="kpi-rate green">${rate}%</span> 完成率</div>
+    </div>
+    <div class="kpi-card c-amber">
+      <div class="kpi-top">
+        <span class="kpi-label">进行中</span>
+        <span class="kpi-icon amber">⚡</span>
+      </div>
+      <div class="kpi-value">${s.in_progress}</div>
+      <div class="kpi-foot"><span class="kpi-rate amber">${s.total ? Math.round(s.in_progress/s.total*100) : 0}%</span> 占比</div>
+    </div>
+    <div class="kpi-card c-slate">
+      <div class="kpi-top">
+        <span class="kpi-label">待开始</span>
+        <span class="kpi-icon slate">○</span>
+      </div>
+      <div class="kpi-value">${s.pending}</div>
+      <div class="kpi-foot"><span class="kpi-rate slate">${s.total ? Math.round(s.pending/s.total*100) : 0}%</span> 占比</div>
+    </div>
+  </div>`;
+
+  /* — 进度横幅 — */
+  const bannerHtml = `<div class="progress-banner">
+    <span class="pb-label">整体开发进度</span>
+    <div class="pb-bar-wrap">
+      <div class="pb-bar-bg"><div class="pb-bar-fill" style="width:${rate}%"></div></div>
+    </div>
+    <div class="pb-stages">
+      <div class="pb-stage-chip"><div class="pb-stage-dot" style="background:var(--green)"></div>已完成 ${s.done}</div>
+      <div class="pb-stage-chip"><div class="pb-stage-dot" style="background:var(--amber)"></div>进行中 ${s.in_progress}</div>
+      <div class="pb-stage-chip"><div class="pb-stage-dot" style="background:var(--slate)"></div>待开始 ${s.pending}</div>
+    </div>
+    <div class="pb-pct">${rate}%</div>
+  </div>`;
+
+  /* — 筛选栏：首次渲染时建立，之后只更新 seg 按钮，不重建搜索框 — */
+  const segBtns = `
+    <button class="seg-btn${activeFilter==='all'?' on':''}" onclick="setFilter('all')">
+      全部 <span class="count-badge">${s.total}</span>
+    </button>
+    <button class="seg-btn green${activeFilter==='done'?' on':''}" onclick="setFilter('done')">
+      已完成 <span class="count-badge">${s.done}</span>
+    </button>
+    <button class="seg-btn amber${activeFilter==='in_progress'?' on':''}" onclick="setFilter('in_progress')">
+      进行中 <span class="count-badge">${s.in_progress}</span>
+    </button>
+    <button class="seg-btn slate${activeFilter==='pending'?' on':''}" onclick="setFilter('pending')">
+      待开始 <span class="count-badge">${s.pending}</span>
+    </button>`;
+
+  /* — 表格 — */
+  const tableHtml = items.length === 0
+    ? `<div class="empty-msg">没有匹配的任务</div>`
+    : `<div class="table-wrap">
+        <div class="table-head">
+          <div class="th">页面名称</div>
+          <div class="th">开发阶段</div>
+          <div class="th">进度</div>
+          <div class="th">状态</div>
+        </div>
+        ${items.map((item, idx) => {
+          const stages = item.stages.map((st, si) => `
+            ${si > 0 ? '<div class="pipe-connector"></div>' : ''}
+            <div class="pipe-item">
+              <div class="pipe-dot ${st.status}">${STAGE_ICON[st.status]}</div>
+              <div class="pipe-lbl">${esc(st.name)}</div>
+            </div>`).join('');
+
+          const pc = PROG_CLASS[item.status] || 's';
+          const ganttHtml = buildGantt(item.dates);
+
+          return `
+            <div class="t-row" onclick="toggleDetail(${idx})">
+              <div class="t-cell"><div>
+                <div class="row-name">${esc(item.name)}</div>
+                <div class="row-cat">${esc(item.category)}</div>
+              </div></div>
+              <div class="t-cell"><div class="pipeline">${stages}</div></div>
+              <div class="t-cell prog-col">
+                <div class="prog-track"><div class="prog-fill ${pc}" style="width:${item.progress}%"></div></div>
+                <div class="prog-num">${item.progress}%</div>
+              </div>
+              <div class="t-cell">
+                <span class="status-pill ${item.status}">
+                  <span class="pill-dot"></span>${STATUS_LBL[item.status]}
+                </span>
+              </div>
+            </div>
+            <div class="detail-row" id="dr-${idx}">
+              <div class="detail-head">时间节点 · 甘特图</div>
+              <div class="gantt-wrap">${ganttHtml}</div>
+            </div>`;
+        }).join('')}
+      </div>`;
+
+  if (!document.getElementById('searchInput')) {
+    // 首次渲染：写入全部结构，搜索框只建一次
+    document.getElementById('mainContent').innerHTML =
+      `<div id="kpiArea"></div><div id="bannerArea"></div>` +
+      `<div class="filter-bar">
+        <div class="search-box">
+          <span class="search-icon-el">🔍</span>
+          <input class="search-input" id="searchInput" placeholder="搜索页面名称..."
+            oninput="onSearch(this.value)">
+        </div>
+        <div class="seg-group" id="segGroup"></div>
+      </div>
+      <div id="tableArea"></div>`;
+  }
+  // 每次只更新数据区，搜索框完全不碰
+  document.getElementById('kpiArea').innerHTML    = kpiHtml;
+  document.getElementById('bannerArea').innerHTML = bannerHtml;
+  document.getElementById('segGroup').innerHTML   = segBtns;
+  document.getElementById('tableArea').innerHTML  = tableHtml;
+
+  /* 进度条入场动画 */
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.pb-bar-fill, .prog-fill, .nav-mini-fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0%';
+      requestAnimationFrame(() => { el.style.width = w; });
+    });
+  });
+}
+
+/* ═══ 甘特图构建 ═══ */
+// 阶段定义：[标签, 开始key, 结束key, 颜色]
+const GANTT_STAGES = [
+  ['原型成稿', '原型开始', '原型截止',  '#3B82F6'],
+  ['提交评审', '提交评审', '提交评审',  '#8B5CF6'],
+  ['原型评审', '评审开始', '原型定稿',  '#6366F1'],
+  ['ADS结构',  'ADS结构',  'ADS结构',   '#0EA5E9'],
+  ['ADS数据',  'ADS数据',  'ADS数据',   '#06B6D4'],
+  ['BI开发',   'BI开始',   'BI截止',    '#10B981'],
+  ['BI测试',   '测试开始', '测试结束',  '#F59E0B'],
+];
+
+function buildGantt(dates) {
+  // 收集所有有效日期，确定时间范围
+  const allDates = Object.values(dates).filter(Boolean).map(d => new Date(d));
+  if (allDates.length === 0) return '<div style="font-size:12px;color:var(--txt3);padding:8px 0">暂无时间数据</div>';
+
+  const today = new Date();
+  allDates.push(today);
+
+  const minD = new Date(Math.min(...allDates.map(d => d.getTime())));
+  const maxD = new Date(Math.max(...allDates.map(d => d.getTime())));
+
+  // 前后各留 1 天 padding
+  minD.setDate(minD.getDate() - 1);
+  maxD.setDate(maxD.getDate() + 1);
+
+  const totalMs = maxD - minD;
+  const totalDays = Math.ceil(totalMs / 86400000);
+
+  function pct(dateStr) {
+    if (!dateStr) return null;
+    return ((new Date(dateStr) - minD) / totalMs * 100).toFixed(2);
+  }
+
+  // 生成刻度（最多 8 个）
+  const tickCount = Math.min(8, totalDays);
+  const tickStep = Math.ceil(totalDays / tickCount);
+  let ticksHtml = '';
+  for (let i = 0; i <= tickCount; i++) {
+    const d = new Date(minD);
+    d.setDate(d.getDate() + i * tickStep);
+    const label = `${d.getMonth()+1}/${d.getDate()}`;
+    ticksHtml += `<div class="gantt-tick">${label}</div>`;
+  }
+
+  // 今日线位置
+  const todayPct = ((today - minD) / totalMs * 100).toFixed(2);
+  const todayLine = (todayPct >= 0 && todayPct <= 100)
+    ? `<div class="gantt-today-line" style="left:${todayPct}%">
+         <div class="gantt-today-label">今日</div>
+       </div>` : '';
+
+  // 各阶段行
+  let rowsHtml = '';
+  for (const [label, startKey, endKey, color] of GANTT_STAGES) {
+    const s = dates[startKey];
+    const e = dates[endKey];
+    if (!s && !e) continue;
+
+    let barHtml = '';
+    if (s && e && s !== e) {
+      const left = pct(s);
+      const right = pct(e);
+      const width = (parseFloat(right) - parseFloat(left)).toFixed(2);
+      if (parseFloat(width) > 0) {
+        barHtml = `<div class="gantt-bar"
+          style="left:${left}%;width:${width}%;background:${color};"
+          data-tip="${label}：${s} → ${e}">
+          ${parseFloat(width) > 8 ? label : ''}
+        </div>`;
+      }
+    }
+    // 单点里程碑
+    if (s) {
+      barHtml += `<div class="gantt-milestone"
+        style="left:${pct(s)}%;background:${color};"
+        title="${label} 开始：${s}"></div>`;
+    }
+    if (e && e !== s) {
+      barHtml += `<div class="gantt-milestone"
+        style="left:${pct(e)}%;background:${color};opacity:.7;"
+        title="${label} 结束：${e}"></div>`;
+    }
+
+    rowsHtml += `
+      <div class="gantt-row">
+        <div class="gantt-label">${label}</div>
+        <div class="gantt-track" style="--gantt-cols:${tickCount}">
+          ${todayLine}
+          ${barHtml}
+        </div>
+      </div>`;
+  }
+
+  return `<div class="gantt">
+    <div class="gantt-header" style="margin-left:90px">${ticksHtml}</div>
+    ${rowsHtml}
+  </div>`;
+}
+
+/* ═══ 交互 ═══ */
+function toggleDetail(idx) {
+  document.getElementById('dr-' + idx)?.classList.toggle('open');
+}
+function setFilter(f) { activeFilter = f; renderAll(); }
+function setCategory(c) { activeCategory = c; renderAll(); }
+let _searchTimer = null;
+function onSearch(v) {
+  searchText = v;
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(() => renderAll(), 300);
+}
+function esc(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ═══ 启动 ═══ */
+loadData();
+
+/* ═══════════════════════════════
+   配置面板
+═══════════════════════════════ */
+let cfgData = null; // { active, projects }
+
+async function openConfig() {
+  try {
+    const r = await fetch('http://localhost:8765/api/config');
+    cfgData = await r.json();
+  } catch(e) {
+    alert('无法读取配置，请确认服务已启动');
+    return;
+  }
+  renderConfigDrawer();
+  document.getElementById('cfgOverlay').classList.add('open');
+  document.getElementById('cfgDrawer').classList.add('open');
+}
+
+function closeConfig() {
+  document.getElementById('cfgOverlay').classList.remove('open');
+  document.getElementById('cfgDrawer').classList.remove('open');
+}
+
+function renderConfigDrawer() {
+  const list = document.getElementById('cfgProjectList');
+  list.innerHTML = cfgData.projects.map((p, i) => `
+    <div class="cfg-project-item${i === cfgData.active ? ' active' : ''}" id="cfgItem-${i}">
+      <div class="cfg-item-header">
+        <div class="cfg-item-index">${i + 1}</div>
+        <div class="cfg-item-fields">
+          <div class="cfg-field">
+            <label class="cfg-label">项目名称</label>
+            <input class="cfg-input" value="${esc(p.name)}"
+              oninput="cfgData.projects[${i}].name=this.value;updateActiveIndicator()">
+          </div>
+          <div class="cfg-field">
+            <label class="cfg-label">Excel 路径</label>
+            <div class="cfg-path-row">
+              <input class="cfg-input cfg-path" id="cfgPath-${i}" value="${esc(p.path)}"
+                oninput="cfgData.projects[${i}].path=this.value">
+              <button class="cfg-browse-btn" onclick="browseFile(${i})" title="浏览文件">📂</button>
+            </div>
+          </div>
+          <div class="cfg-field cfg-field-row">
+            <div style="flex:1">
+              <label class="cfg-label">Sheet 名称</label>
+              <input class="cfg-input" value="${esc(p.sheet || 'BI开发进度明细')}"
+                oninput="cfgData.projects[${i}].sheet=this.value">
+            </div>
+            <div class="cfg-item-actions">
+              ${i !== cfgData.active
+                ? `<button class="cfg-btn cfg-btn-activate" onclick="activateProject(${i})">切换到此项目</button>`
+                : `<span class="cfg-active-badge">当前项目</span>`}
+              ${cfgData.projects.length > 1
+                ? `<button class="cfg-btn cfg-btn-del" onclick="deleteProject(${i})">删除</button>`
+                : ''}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function activateProject(idx) {
+  cfgData.active = idx;
+  renderConfigDrawer();
+}
+
+function deleteProject(idx) {
+  if (cfgData.projects.length <= 1) return;
+  cfgData.projects.splice(idx, 1);
+  if (cfgData.active >= cfgData.projects.length) cfgData.active = cfgData.projects.length - 1;
+  renderConfigDrawer();
+}
+
+function addProject() {
+  cfgData.projects.push({ name: '新项目', path: '', sheet: 'BI开发进度明细' });
+  renderConfigDrawer();
+  // 滚动到新项目
+  setTimeout(() => {
+    const last = document.querySelector('.cfg-project-item:last-child');
+    last?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    last?.querySelector('.cfg-input')?.focus();
+  }, 50);
+}
+
+function updateActiveIndicator() {
+  // 实时更新项目名称显示
+}
+
+async function browseFile(idx) {
+  const btn = document.querySelector(`#cfgItem-${idx} .cfg-browse-btn`);
+  const input = document.getElementById(`cfgPath-${idx}`);
+  if (btn) { btn.textContent = '…'; btn.disabled = true; }
+  try {
+    const r = await fetch('http://localhost:8765/api/browse');
+    const res = await r.json();
+    if (res.error) throw new Error(res.error);
+    if (res.path) {
+      cfgData.projects[idx].path = res.path;
+      if (input) input.value = res.path;
+    }
+  } catch(e) {
+    alert('浏览文件失败：' + e.message);
+  } finally {
+    if (btn) { btn.textContent = '📂'; btn.disabled = false; }
+  }
+}
+
+function showPathHint(idx, filename) {
+  const existing = document.getElementById(`pathHint-${idx}`);
+  if (existing) existing.remove();
+  const hint = document.createElement('div');
+  hint.id = `pathHint-${idx}`;
+  hint.className = 'cfg-path-hint';
+  hint.innerHTML = `⚠ 浏览器限制，只能获取文件名 <b>${esc(filename)}</b>，请在输入框补全完整路径`;
+  const field = document.getElementById(`cfgPath-${idx}`)?.closest('.cfg-field');
+  if (field) field.appendChild(hint);
+}
+
+async function saveConfig() {
+  const btn = document.getElementById('cfgSaveBtn');
+  btn.textContent = '保存中...';
+  btn.disabled = true;
+  try {
+    const r = await fetch('http://localhost:8765/api/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cfgData)
+    });
+    const res = await r.json();
+    if (res.error) throw new Error(res.error);
+    btn.textContent = '已保存 ✓';
+    setTimeout(() => {
+      closeConfig();
+      btn.textContent = '保存并应用';
+      btn.disabled = false;
+      loadData(); // 重新加载数据
+    }, 800);
+  } catch(e) {
+    btn.textContent = '保存失败';
+    btn.disabled = false;
+    alert('保存失败：' + e.message);
+  }
+}
+</script>
+
+<!-- ═══ 配置抽屉 ═══ -->
+<div class="cfg-overlay" id="cfgOverlay" onclick="closeConfig()"></div>
+<div class="cfg-drawer" id="cfgDrawer">
+  <div class="cfg-header">
+    <div>
+      <div class="cfg-title">项目配置</div>
+      <div class="cfg-subtitle">管理进度看板的数据源，支持多个项目快速切换</div>
+    </div>
+    <button class="cfg-close" onclick="closeConfig()">✕</button>
+  </div>
+
+  <div class="cfg-body">
+    <div class="cfg-section-label">项目列表</div>
+    <div id="cfgProjectList"></div>
+    <button class="cfg-add-btn" onclick="addProject()">＋ 添加项目</button>
+
+    <div class="cfg-tip">
+      <div class="cfg-tip-title">使用说明</div>
+      <ul class="cfg-tip-list">
+        <li>Excel 路径填写文件的完整路径，例如 <code>C:\项目\进度表.xlsx</code></li>
+        <li>Sheet 名称填写进度数据所在的工作表名，默认 <code>BI开发进度明细</code></li>
+        <li>表格格式需与当前模板一致：第一列「分类」，第二列「页面名称」，后续为各阶段日期</li>
+        <li>保存后自动切换到选中的项目并刷新数据</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cfg-footer">
+    <button class="cfg-btn cfg-btn-cancel" onclick="closeConfig()">取消</button>
+    <button class="cfg-btn cfg-btn-save" id="cfgSaveBtn" onclick="saveConfig()">保存并应用</button>
+  </div>
+</div>
+
+<style>
+/* ─── 配置抽屉样式 ─── */
+.cfg-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 300;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s var(--ease);
+  backdrop-filter: blur(2px);
+}
+.cfg-overlay.open { opacity: 1; pointer-events: all; }
+
+.cfg-drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 520px;
+  max-width: 95vw;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  z-index: 400;
+  display: flex; flex-direction: column;
+  box-shadow: -8px 0 40px rgba(0,0,0,.25);
+  transform: translateX(100%);
+  transition: transform .3s var(--ease);
+}
+.cfg-drawer.open { transform: translateX(0); }
+
+.cfg-header {
+  padding: 24px 24px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-shrink: 0;
+}
+.cfg-title   { font-size: 16px; font-weight: 700; color: var(--txt1); }
+.cfg-subtitle { font-size: 12px; color: var(--txt3); margin-top: 4px; }
+.cfg-close {
+  width: 30px; height: 30px;
+  border: none; border-radius: 7px;
+  background: var(--surface2); color: var(--txt2);
+  cursor: pointer; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--speed) var(--ease);
+}
+.cfg-close:hover { background: var(--surface3); color: var(--txt1); }
+
+.cfg-body {
+  flex: 1; overflow-y: auto;
+  padding: 20px 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+.cfg-section-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--txt3);
+}
+
+/* 项目卡片 */
+.cfg-project-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  transition: border-color var(--speed) var(--ease);
+}
+.cfg-project-item.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.cfg-item-header { display: flex; gap: 12px; }
+.cfg-item-index {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  background: var(--surface3);
+  color: var(--txt2);
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.cfg-project-item.active .cfg-item-index {
+  background: var(--accent); color: #fff;
+}
+.cfg-item-fields { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+
+.cfg-field { display: flex; flex-direction: column; gap: 4px; }
+.cfg-field-row { flex-direction: row; align-items: flex-end; gap: 10px; }
+.cfg-label { font-size: 10px; font-weight: 600; color: var(--txt3); text-transform: uppercase; letter-spacing: .05em; }
+.cfg-input {
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--txt1);
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  transition: all var(--speed) var(--ease);
+}
+.cfg-input:focus { border-color: var(--accent2); box-shadow: 0 0 0 3px var(--accent-soft); }
+.cfg-path { font-size: 11px; }
+.cfg-path-row { display: flex; gap: 6px; align-items: center; }
+.cfg-path-row .cfg-input { flex: 1; }
+.cfg-browse-btn {
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--txt2);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--speed) var(--ease);
+}
+.cfg-browse-btn:hover { border-color: var(--accent); background: var(--accent-soft); }
+.cfg-browse-btn:disabled { opacity: .5; cursor: not-allowed; }
+.cfg-path-hint {
+  font-size: 11px; color: var(--amber);
+  background: var(--amber-soft);
+  border: 1px solid rgba(217,119,6,.2);
+  border-radius: 6px; padding: 6px 10px;
+  margin-top: 5px; line-height: 1.5;
+}
+
+.cfg-item-actions {
+  display: flex; gap: 6px; align-items: center; flex-shrink: 0;
+}
+.cfg-active-badge {
+  font-size: 10px; font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 10px; border-radius: 99px;
+  white-space: nowrap;
+}
+
+/* 按钮 */
+.cfg-btn {
+  height: 32px; padding: 0 14px;
+  border-radius: 7px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--txt2);
+  font-size: 11px; font-weight: 600;
+  cursor: pointer; font-family: inherit;
+  transition: all var(--speed) var(--ease);
+  white-space: nowrap;
+}
+.cfg-btn:hover { background: var(--surface3); color: var(--txt1); }
+.cfg-btn-activate { border-color: var(--accent); color: var(--accent); }
+.cfg-btn-activate:hover { background: var(--accent); color: #fff; }
+.cfg-btn-del { border-color: transparent; color: var(--txt3); }
+.cfg-btn-del:hover { color: var(--red); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.06); }
+
+.cfg-add-btn {
+  height: 38px; width: 100%;
+  border-radius: 9px;
+  border: 1.5px dashed var(--border-s);
+  background: transparent;
+  color: var(--txt3);
+  font-size: 12px; font-weight: 500;
+  cursor: pointer; font-family: inherit;
+  transition: all var(--speed) var(--ease);
+}
+.cfg-add-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
+/* 使用说明 */
+.cfg-tip {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 4px;
+}
+.cfg-tip-title { font-size: 11px; font-weight: 700; color: var(--txt2); margin-bottom: 8px; }
+.cfg-tip-list { padding-left: 16px; display: flex; flex-direction: column; gap: 5px; }
+.cfg-tip-list li { font-size: 11px; color: var(--txt3); line-height: 1.6; }
+.cfg-tip-list code {
+  background: var(--surface3); padding: 1px 5px;
+  border-radius: 4px; font-size: 10px; color: var(--txt2);
+}
+
+/* 底部操作栏 */
+.cfg-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: flex-end; gap: 10px;
+  flex-shrink: 0;
+}
+.cfg-btn-cancel { }
+.cfg-btn-save {
+  background: var(--accent); border-color: var(--accent); color: #fff; height: 36px; padding: 0 20px;
+}
+.cfg-btn-save:hover { opacity: .88; background: var(--accent); }
+.cfg-btn-save:disabled { opacity: .5; cursor: not-allowed; }
+</style>
+</body>
+</html>

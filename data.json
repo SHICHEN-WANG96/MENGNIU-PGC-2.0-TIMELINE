@@ -1,0 +1,72 @@
+{
+  "updated_at": "2026-03-24T10:00:00",
+  "summary": { "total": 3, "done": 1, "in_progress": 1, "pending": 1 },
+  "categories": [
+    { "name": "BI仪表盘", "total": 2, "done": 1 },
+    { "name": "基础数据", "total": 1, "done": 0 }
+  ],
+  "items": [
+    {
+      "name": "进度看板",
+      "category": "BI仪表盘",
+      "stages": [
+        { "name": "原型成稿", "status": "done" },
+        { "name": "提交评审", "status": "done" },
+        { "name": "原型评审", "status": "done" },
+        { "name": "ADS结构", "status": "done" },
+        { "name": "ADS数据", "status": "in_progress" },
+        { "name": "BI开发", "status": "in_progress" },
+        { "name": "BI测试", "status": "pending" }
+      ],
+      "progress": 60,
+      "status": "in_progress",
+      "dates": {
+        "原型开始": "2026-02-01",
+        "原型截止": "2026-02-05",
+        "提交评审": "2026-02-06",
+        "评审开始": "2026-02-07",
+        "原型定稿": "2026-02-09",
+        "ADS结构": "2026-02-10",
+        "ADS数据": "2026-03-01",
+        "BI开始": "2026-03-05",
+        "BI截止": "2026-03-20",
+        "测试开始": "2026-03-21",
+        "测试结束": "2026-03-25"
+      }
+    },
+    {
+      "name": "数据建模",
+      "category": "BI仪表盘",
+      "stages": [
+        { "name": "原型成稿", "status": "done" },
+        { "name": "提交评审", "status": "done" },
+        { "name": "原型评审", "status": "done" },
+        { "name": "ADS结构", "status": "done" },
+        { "name": "ADS数据", "status": "done" },
+        { "name": "BI开发", "status": "done" },
+        { "name": "BI测试", "status": "done" }
+      ],
+      "progress": 100,
+      "status": "done",
+      "dates": {
+        "原型开始": "2025-12-01",
+        "原型截止": "2025-12-03",
+        "ADS结构": "2025-12-05",
+        "ADS数据": "2025-12-10",
+        "BI开始": "2025-12-11",
+        "BI截止": "2025-12-20"
+      }
+    },
+    {
+      "name": "基础字典维护",
+      "category": "基础数据",
+      "stages": [
+        { "name": "原型成稿", "status": "pending" },
+        { "name": "提交评审", "status": "pending" }
+      ],
+      "progress": 0,
+      "status": "pending",
+      "dates": {}
+    }
+  ]
+}
